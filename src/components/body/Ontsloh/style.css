@@ -1,0 +1,9 @@
+
+.bg_cont{
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+.img{
+    display: inline-block;
+}
