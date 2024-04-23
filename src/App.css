@@ -12,12 +12,26 @@ body{
 }
 .body{
     width: 1200px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .ontsloh-con{
     width: 1200px;
     height: 30vh;
+    margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.recent-con{
+    width: 1200px;
+    margin-top: 50px;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+}
+button{
+    cursor: pointer;
 }

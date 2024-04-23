@@ -1,0 +1,22 @@
+
+.recent-con .bg_cont{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    gap: 1rem;
+}
+.recent-con .img{
+    display: inline-block;
+}
+.recent-con.text{
+    display: flex;
+    flex-direction: column;
+}
+.recent-con .btn1{
+    margin-top: 1rem;
+    color: blueviolet;
+    font-size: medium;
+    border: none;
+}

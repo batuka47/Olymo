@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import DropdownBtn from './dropdown/dropdownBtn';
-import Logo from '../../logo';
+import Logo from '../../assets/logo';
 import './Header.css'
 
 function Header(){
