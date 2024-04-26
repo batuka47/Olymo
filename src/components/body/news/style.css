@@ -1,0 +1,29 @@
+.news-con .left{
+    height: 90%;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+    width: 65%;
+    gap: 1.5rem;
+    border-right: 1px solid black;
+}
+.news-con button{
+    width: 90%;
+    border: none;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.news-con .BGcon{
+    display: flex;
+    flex-direction: row
+}
+.news-con .right{
+    width: 35%;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+}

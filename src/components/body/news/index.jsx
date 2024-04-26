@@ -2,10 +2,10 @@ import {useState, useEffect} from 'react';
 import'./style.css';
 import Left from './left'
 import Right from './right'
-
+import { MdLibraryBooks } from "react-icons/md";
 
 function News(props){
-      const recent = [
+      const left = [
           {
             title: "Lorem ipsum Математикийн олимпиад зарлагдлаа",
             text: `Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -50,18 +50,19 @@ function News(props){
           },
         ]
       return (
-       <>
-            <div className='recent-con'>
+       <div className='BGcon'>
+            <div className='left'>
                 {
-                recent.map((data)=>{
-                    return <Left title={data.title} button1={data.button1} img={data.imgUrl}/>
-                })
+                  left.map((data)=>{
+                    return <Left title={data.title} text={data.text} img={data.imgUrl}/>
+                  })
                 }
+                <button>Цааш үзэх <MdLibraryBooks/></button>
             </div>
-            <div>
+            <div className='right'>
                 <Right/>
             </div>
-        </>
+        </div>
       )
   }
   

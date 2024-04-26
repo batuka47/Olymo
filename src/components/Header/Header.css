@@ -17,6 +17,7 @@
     height: 2rem;
     min-width: 5rem;
     border: none;
+    background-color: white;
     font-size: large;
     font-weight: 700;
     display: flex;

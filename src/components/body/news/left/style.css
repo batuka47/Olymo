@@ -1,0 +1,11 @@
+.news-con .bg_cont{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+.news-con .text-con{
+    gap: 2rem;
+}

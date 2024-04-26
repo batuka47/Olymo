@@ -1,0 +1,19 @@
+.news-con .right .bg_cont .con1{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.news-con .right .bg_cont{
+    display: flex;
+    flex-direction: column;
+}
+.news-con .line1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.news-con .right .bg_cont .con2{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

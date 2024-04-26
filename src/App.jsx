@@ -4,7 +4,7 @@ import bigImg from  "./assets/image.png"
 import Header from './components/Header/Header'
 import Ontsloh from './components/body/Ontsloh'
 import Recent from './components/body/Recent'
-// import News from './components/body/news'
+import News from './components/body/news'
 
 
 function App() {
@@ -49,6 +49,10 @@ function App() {
             return <Recent title={data.title} button1={data.button1} img={data.imgUrl}/>
           })
         }
+      </div>
+
+      <div className='news-con'>
+          <News/>
       </div>
     </div>
   )

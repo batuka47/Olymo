@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import'./style.css'
-
+import { MdLibraryBooks } from "react-icons/md";
 
 
 
@@ -11,10 +11,11 @@ function Left(props){
             <div className='img'>
                 <img src={props.img} alt="Logo"  width="100%"/>
             </div>
-            <div className='text'>           
+            <div className='text-con'>           
                     <h3>{props.title}</h3>
-                    <button className='btn1'>{props.button1}</button>
+                    <p className='text'>{props.text}</p>
             </div>
+            
         </div>
     )
 }
