@@ -5,7 +5,7 @@ import Header from './components/Header/Header'
 import Ontsloh from './components/body/Ontsloh'
 import Recent from './components/body/Recent'
 import News from './components/body/news'
-
+import Foodder from './components/foodder'
 
 function App() {
 
@@ -53,6 +53,9 @@ function App() {
 
       <div className='news-con'>
           <News/>
+      </div >
+      <div className='foodder-con'>
+        <Foodder/>
       </div>
     </div>
   )

@@ -1,0 +1,9 @@
+.foodder-con .bg_cont{
+    width: 100%;
+    background-color: blueviolet;
+    background-image: url(../../../assets/image\ 11.png);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 70vh;
+}   
