@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme{
+  --font-display: "Mulish", "Yeseva One";
+}
+.mulish {
+  font-family: 'Mulish', sans-serif;
+}
+.yeseva {
+  font-family: 'Yeseva One', serif;
+}
+
+.default-purple {
+  background-color: #480CA8;
+}
+.default-white-text {
+  color: #D9D9D9;
+}
+.default-black-text {
+  color: #0B0B0B;
+}
+
+
+:root {
+  font-family: "Mulish", sans-serif;
+  background-color: #D9D9D9;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
