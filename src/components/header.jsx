@@ -16,31 +16,22 @@ function Header() {
   ];
 
   const location = useLocation();
-  const [selectedTab, setSelectedTab] = useState(location.pathname);
   const [indicatorWidth, setIndicatorWidth] = useState(0);
   const [indicatorPosition, setIndicatorPosition] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const tabRefs = useRef([]);
   const [scrollY, setScrollY] = useState(0);
-  const [isNavVisible, setIsNavVisible] = useState(false);
-
-  useEffect(() => {
-    // Set the initial indicator to the first tab
-    if (tabRefs.current[0]) {
-      setIndicatorWidth(tabRefs.current[0].offsetWidth);
-      setIndicatorPosition(tabRefs.current[0].offsetLeft);
-    }
-  }, []); // This runs only once when the component mounts
+  const [navVisible, setNavVisible] = useState(false);
+  const tabRefs = useRef([]);
+  const timeoutRef = useRef(null);
+  const lastScrollY = useRef(0);
+  const showTimerRef = useRef(null);
 
   useEffect(() => {
     const selectedIndex = navItems.findIndex(item => item.path === location.pathname);
-    setSelectedTab(location.pathname);
-
+    
     if (selectedIndex !== -1 && tabRefs.current[selectedIndex]) {
       setIndicatorWidth(tabRefs.current[selectedIndex].offsetWidth);
       setIndicatorPosition(tabRefs.current[selectedIndex].offsetLeft);
-    } else {
-      // If the selected tab is not found, default to the first item
+    } else if (location.pathname === "/" || location.pathname === "") {
       setIndicatorWidth(tabRefs.current[0]?.offsetWidth || 0);
       setIndicatorPosition(tabRefs.current[0]?.offsetLeft || 0);
     }
@@ -49,40 +40,88 @@ function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
-      // Show the nav only if scrolled past 100vh
-      setIsNavVisible(scrollY > window.innerHeight);
+      
+      if (location.pathname === "/" || location.pathname === "") {
+        if (window.scrollY > window.innerHeight) {
+          if (!navVisible) {
+            setNavVisible(true);
+            if (showTimerRef.current) {
+              clearTimeout(showTimerRef.current);
+            }
+            showTimerRef.current = setTimeout(() => {
+              setNavVisible(true);
+            }, 1000);
+          }
+
+          if (window.scrollY > lastScrollY.current) {
+            if (showTimerRef.current) {
+              clearTimeout(showTimerRef.current);
+            }
+            setNavVisible(false);
+          } else {
+            if (timeoutRef.current) {
+              clearTimeout(timeoutRef.current);
+            }
+            timeoutRef.current = setTimeout(() => {
+              setNavVisible(false);
+            }, 3000);
+          }
+        } else {
+          setNavVisible(false);
+        }
+      }
+
+      lastScrollY.current = window.scrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      if (showTimerRef.current) {
+        clearTimeout(showTimerRef.current);
+      }
     };
-  }, [scrollY]);
+  }, [location.pathname, navVisible]);
 
+  useEffect(() => {
+    if (location.pathname === "/" || location.pathname === "") {
+      setIndicatorWidth(tabRefs.current[0]?.offsetWidth || 0);
+      setIndicatorPosition(tabRefs.current[0]?.offsetLeft || 0);
+      setNavVisible(false);
+    }
+  }, []);
+
+  const logoSrc = (location.pathname === "/" || location.pathname === "") && scrollY < window.innerHeight ? "/fullLogoWhite.svg" : "/fullLogo.svg";
+  const searchIconSrc = (location.pathname === "/" || location.pathname === "") && scrollY < window.innerHeight ? "/searchWhite.svg" : "/search.svg";
 
   return (
     <motion.div
-      className={`h-20 w-full fixed top-0 left-0 flex flex-col px-10 z-10 ${isNavVisible ? 'block' : 'hidden'}`}
+      className={`h-20 w-full fixed top-0 left-0 flex flex-col px-10 z-10 transition-transform duration-300`}
       initial={{ opacity: 0 }}
-      animate={{ opacity: isNavVisible ? 1 : 0 }} // Fade in/out based on visibility
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
       <div className="h-2/3 w-full flex flex-row relative items-center justify-end gap-5">
         <Link to={'/'} className="mx-auto">
-            <img src="/fullLogo.svg" alt="logo" className='h-14' />
+            <img src={logoSrc} alt="logo" className='h-14' />
         </Link>
         <button className='default-purple w-24 h-7 absolute right-12 default-white-text flex justify-center items-center rounded-sm'>Нэвтрэх</button>
-        <img src="/search.svg" alt="search" className='absolute right-0' />
+        <img src={searchIconSrc} alt="search" className='absolute right-0' />
       </div>
-      <nav className="relative flex justify-center space-x-4 mt-2">
+      <motion.nav
+        className={`relative flex justify-center space-x-4 mt-2`}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: navVisible ? 1 : 0, y: navVisible ? 0 : -20 }}
+        transition={{ duration: 0.3 }}
+      >
         {navItems.map((item, index) => (
           <div className="relative" key={index} ref={el => tabRefs.current[index] = el}>
             <Link
               to={item.path}
-              className={`text-gray-700 transition-all duration-300`}
-              onClick={() => setSelectedTab(item.path)}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              className="text-gray-700 transition-all duration-300"
             >
               {item.name}
             </Link>
@@ -94,7 +133,7 @@ function Header() {
           animate={{ width: indicatorWidth, x: indicatorPosition }}
           transition={{ duration: 0.3, ease: "linear" }}
         />
-      </nav>
+      </motion.nav>
     </motion.div>
   )
 }
