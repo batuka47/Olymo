@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 function Header() {
   const navItems = [
-    { name: "Онцлох", path: "/featured" },
+    { name: "Онцлох", path: "/" },
     { name: "Боловсрол", path: "/education" },
     { name: "Олимпиад", path: "/olympics" },
     { name: "Дэлхийд", path: "/world" },
@@ -13,7 +13,6 @@ function Header() {
     { name: "Шинжлэх ухаан", path: "/science" },
     { name: "Эвентүүд", path: "/events" },
     { name: "Бидний тухай", path: "/about" },
-    { name: "Түгээмэл асуултууд", path: "/faq" }
   ];
 
   const location = useLocation();
@@ -26,16 +25,26 @@ function Header() {
   const [isNavVisible, setIsNavVisible] = useState(false);
 
   useEffect(() => {
-    setSelectedTab(location.pathname);
-  }, [location]);
+    // Set the initial indicator to the first tab
+    if (tabRefs.current[0]) {
+      setIndicatorWidth(tabRefs.current[0].offsetWidth);
+      setIndicatorPosition(tabRefs.current[0].offsetLeft);
+    }
+  }, []); // This runs only once when the component mounts
 
   useEffect(() => {
-    const selectedIndex = navItems.findIndex(item => item.path === selectedTab);
-    if (tabRefs.current[selectedIndex]) {
+    const selectedIndex = navItems.findIndex(item => item.path === location.pathname);
+    setSelectedTab(location.pathname);
+
+    if (selectedIndex !== -1 && tabRefs.current[selectedIndex]) {
       setIndicatorWidth(tabRefs.current[selectedIndex].offsetWidth);
       setIndicatorPosition(tabRefs.current[selectedIndex].offsetLeft);
+    } else {
+      // If the selected tab is not found, default to the first item
+      setIndicatorWidth(tabRefs.current[0]?.offsetWidth || 0);
+      setIndicatorPosition(tabRefs.current[0]?.offsetLeft || 0);
     }
-  }, [selectedTab]);
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +58,7 @@ function Header() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [scrollY]);
+
 
   return (
     <motion.div
