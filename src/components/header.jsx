@@ -41,35 +41,19 @@ function Header() {
     const handleScroll = () => {
       setScrollY(window.scrollY);
       
-      if (location.pathname === "/" || location.pathname === "") {
-        if (window.scrollY > window.innerHeight) {
-          if (!navVisible) {
-            setNavVisible(true);
-            if (showTimerRef.current) {
-              clearTimeout(showTimerRef.current);
-            }
-            showTimerRef.current = setTimeout(() => {
-              setNavVisible(true);
-            }, 1000);
-          }
-
-          if (window.scrollY > lastScrollY.current) {
-            if (showTimerRef.current) {
-              clearTimeout(showTimerRef.current);
-            }
-            setNavVisible(false);
-          } else {
-            if (timeoutRef.current) {
-              clearTimeout(timeoutRef.current);
-            }
-            timeoutRef.current = setTimeout(() => {
-              setNavVisible(false);
-            }, 3000);
-          }
-        } else {
+      setNavVisible(false);
+      if (window.scrollY < window.innerHeight && location.pathname === "/" || location.pathname === "") {
+        setNavVisible(false);
+      } else if (window.scrollY >= window.innerHeight && window.scrollY < window.innerHeight * 2 && location.pathname === "/" || location.pathname === "") {
+        setNavVisible(true);
+      } else {
+        if (window.scrollY > lastScrollY.current) {
           setNavVisible(false);
+        } else {
+          setNavVisible(true);
         }
-      }
+    }
+      
 
       lastScrollY.current = window.scrollY;
     };
@@ -96,17 +80,18 @@ function Header() {
 
   const logoSrc = (location.pathname === "/" || location.pathname === "") && scrollY < window.innerHeight ? "/fullLogoWhite.svg" : "/fullLogo.svg";
   const searchIconSrc = (location.pathname === "/" || location.pathname === "") && scrollY < window.innerHeight ? "/searchWhite.svg" : "/search.svg";
+  const bgSrc = (location.pathname === "/" || location.pathname === "") && scrollY < window.innerHeight ? "bg-[#01030D]" : "default-white-bg";
 
   return (
     <motion.div
-      className={`h-20 w-full fixed top-0 left-0 flex flex-col px-10 z-10 transition-transform duration-300`}
+      className={`h-20 w-full mulish sm:block hidden fixed pb-6 top-0 left-0 ${bgSrc} flex flex-col px-10 z-10 transition-transform duration-300`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="h-2/3 w-full flex flex-row relative items-center justify-end gap-5">
+      <div className="h-2/3 mt-2 w-full flex flex-row relative items-center justify-end gap-5">
         <Link to={'/'} className="mx-auto">
-            <img src={logoSrc} alt="logo" className='h-14' />
+            <img src={logoSrc} alt="logo" className='h-12' />
         </Link>
         <button className='default-purple w-24 h-7 absolute right-12 default-white-text flex justify-center items-center rounded-sm'>Нэвтрэх</button>
         <img src={searchIconSrc} alt="search" className='absolute right-0' />
@@ -122,13 +107,14 @@ function Header() {
             <Link
               to={item.path}
               className="text-gray-700 transition-all duration-300"
+              onClick={() => window.scrollTo(0, 0)}
             >
               {item.name}
             </Link>
           </div>
         ))}
         <motion.span
-          className="absolute left-0 bottom-[-2px] h-[2px] bg-black"
+          className="absolute left-0 bottom-[2px] h-[1.5px] bg-black"
           initial={{ width: 0, x: 0 }}
           animate={{ width: indicatorWidth, x: indicatorPosition }}
           transition={{ duration: 0.3, ease: "linear" }}

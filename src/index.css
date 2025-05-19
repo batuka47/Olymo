@@ -13,17 +13,32 @@
 .default-purple {
   background-color: #480CA8;
 }
+.default-purple-text {
+  color: #480CA8;
+}
 .default-white-text {
-  color: #D9D9D9;
+  color: #FDFDFD;
 }
 .default-black-text {
   color: #0B0B0B;
 }
-
+.default-white-bg {
+  background-color: #FDFDFD;
+}
+.default-black-bg {
+  background-color: #0B0B0B;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 :root {
   font-family: "Mulish", sans-serif;
-  background-color: #D9D9D9;
+  background-color: #FDFDFD;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
