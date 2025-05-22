@@ -11,7 +11,7 @@ function BigBanner(props) {
         <div className={`sm:w-1/2 w-full sm:${bgClass} h-full flex justify-center items-center`}>
             <Link to={props.path} className='w-full h-full flex flex-col sm:justify-center sm:items-center' onClick={() => window.scrollTo(0, 0)}>
                 <h1 className={`font-semibold mt-2 sm:text-center capitalize hidden sm:block ${textClass}`}>{props.category}</h1>
-                <h1 className={`font-bold text-2xl w-full sm:w-auto yeseva mt-2 sm:text-center sm:${textClass}`}>{props.title}</h1>
+                <h1 className={`font-bold sm:text-2xl text-xl w-full sm:w-auto yeseva mt-2 sm:text-center sm:${textClass}`}>{props.title}</h1>
                 <p className={`font-thin w-full sm:w-2/3 text-sm my-2 sm:text-center sm:${textClass}`}>{props.description}</p>
                 <p className={`font-semibold text-sm mb-2 sm:text-center hidden sm:block ${textClass}`}>By: {props.author}</p>
                 <div className={`h-8 w-32 text-xs hidden sm:flex justify-center items-center rounded-4xl border-2 border-solid border-[#${props.border}]`}>Дэлгэрэнгүй үзэх</div>
@@ -21,9 +21,9 @@ function BigBanner(props) {
                 </div>
             </Link>
         </div>
-        <Link to={props.path} className='sm:w-1/2 w-full h-full' onClick={() => window.scrollTo(0, 0)}>
-            <div className='w-full h-full'>
-                <img src={props.img} alt={props.title} className='object-cover w-full h-full'/>
+        <Link to={props.path} className='sm:w-1/2 w-full sm:h-full' onClick={() => window.scrollTo(0, 0)}>
+            <div className='w-full sm:h-full'>
+                <img src={props.img} alt={props.title} className='object-cover w-full h-[250px] sm:h-full'/>
             </div>
         </Link>
     </div>

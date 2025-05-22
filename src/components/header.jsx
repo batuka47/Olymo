@@ -6,7 +6,7 @@ function Header() {
   const navItems = [
     { name: "Онцлох", path: "/" },
     { name: "Боловсрол", path: "/education" },
-    { name: "Олимпиад", path: "/olympics" },
+    { name: "Олимпиад", path: "/olympiad" },
     { name: "Дэлхийд", path: "/world" },
     { name: "Спорт", path: "/sports" },
     { name: "Технологи", path: "/technology" },
@@ -84,7 +84,7 @@ function Header() {
 
   return (
     <motion.div
-      className={`h-20 w-full mulish sm:block hidden fixed pb-6 top-0 left-0 ${bgSrc} flex flex-col px-10 z-10 transition-transform duration-300`}
+      className={`h-20 w-full mulish sm:block hidden fixed pb-6 top-0 left-0 ${bgSrc} flex flex-col px-10 z-50 transition-transform duration-300`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}

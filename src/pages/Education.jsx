@@ -1,18 +1,36 @@
 import { useState, useRef, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom'
 import Card from '../components/card';
 import BigBanner from '../components/bigBanner';
 import Advertisement from '../components/advertisement';
 import CategoryCard from '../components/categoryCard';
 import DailyCartoon from '../components/dailyCartoon';
 import {news, dailyCartoon, advertisement} from '../Data'
+import { motion } from 'framer-motion'
 
-function Home() {
+function Education() {
   const [isDragging, setIsDragging] = useState(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
   const containerRef = useRef(null);
+  const navRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const itemsPerPage = 8;
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(location.pathname);
+
+  const navItems = [
+    { name: "Онцлох", path: "/" },
+    { name: "Боловсрол", path: "/education" },
+    { name: "Олимпиад", path: "/olympiad" },
+    { name: "Дэлхийд", path: "/world" },
+    { name: "Спорт", path: "/sports" },
+    { name: "Технологи", path: "/technology" },
+    { name: "Шинжлэх ухаан", path: "/science" },
+    { name: "Эвентүүд", path: "/events" },
+    { name: "Бидний тухай", path: "/about" },
+  ];
 
   useEffect(() => {
     const handleMouseUpGlobal = () => {
@@ -22,6 +40,15 @@ function Home() {
     return () => {
       window.removeEventListener('mouseup', handleMouseUpGlobal);
     };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleMouseDown = (e) => {
@@ -64,8 +91,37 @@ function Home() {
   const totalPages = Math.ceil(news.filter(data => data.mainCategory === "education").length / itemsPerPage);
 
   return (
-    <div className="min-h-screen mt-32 mulish flex flex-col items-center justify-center">
-
+    <div className="min-h-screen sm:mt-32 mulish flex flex-col items-center justify-center">
+      <motion.div 
+      ref={navRef}
+      className="left-0 w-full sm:hidden bg-white  border-y border-gray-200"
+      transition={{ duration: 0.3 }}
+    >
+      <div className='flex items-center px-2 py-2 overflow-x-auto scrollbar-hide whitespace-nowrap gap-2'>
+        {navItems.map((item, index) => (
+          <Link
+            key={index}
+            to={item.path}
+            className={`flex flex-col items-center px-2 py-1 hover:bg-gray-100 rounded-md transition-colors duration-200 ${
+              activeTab === item.path 
+                ? 'text-[#1E3083]' 
+                : 'text-gray-600'
+            }`}
+            onClick={() => {
+              setActiveTab(item.path);
+              window.scrollTo(0, 0);
+            }}
+          >
+            <span className='text-md font-semibold text-center whitespace-nowrap'>{item.name}</span>
+            {activeTab === item.path && (
+              <div className="h-0.5 w-full bg-[#1E3083] mt-1" />
+            )}
+          </Link>
+        ))}
+      </div>
+    </motion.div>
+      <h1 className=" block sm:hidden font-bold text-2xl yeseva">Онцлох мэдээ</h1>
+      <p className="block mb-8 sm:hidden font-light text-xl mulish">Боловсролын салбарын гол мэдээнүүд</p>
       {/* Big Banner */}
       {news.length > 0 && (
         (() => {
@@ -91,18 +147,18 @@ function Home() {
 
 
       {/* Feature Education Section */}
-      <h1 className="mt-20 font-bold text-3xl yeseva">Олимпиад</h1>
-      <p className="mb-16 font-light text-xl mulish">Салбаруудын гол олимпиадууд</p>
+      <h1 className="sm:mt-20 mt-8 hidden sm:block font-bold text-3xl yeseva">Онцлох мэдээ</h1>
+      <p className="sm:mb-16 mb-6 hidden sm:block font-light text-xl mulish">Боловсролын салбарын гол мэдээнүүд</p>
 
       <div
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onDragStart={(e) => e.preventDefault()}
-        className={`w-full overflow-x-auto scrollbar-hide px-10 ${isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'}`}
+        className={`w-full sm:overflow-x-auto scrollbar-hide px-4 sm:px-10 sm:${isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'}`}
       >
-        <div className="flex flex-row gap-10 justify-start items-start min-w-max">
-          {news.filter((data) => data.mainCategory === "education" && data.category.includes("feature")).reverse().map((data) => (
+        <div className="flex sm:flex-row flex-col sm:gap-10 justify-start items-start sm:w-full sm:min-w-max">
+          {news.filter((data) => data.mainCategory === "education" && data.category.includes("feature")).reverse().slice(0, windowWidth < 640 ? 6 : news.length).map((data) => (
             <Card
               key={data.id}
               id={data.id}
@@ -111,6 +167,7 @@ function Home() {
               img={data.img1}
               path={`/${data.mainCategory}/${data.path}`}
               author={data.author}
+              date={data.date}
             />
           ))}
         </div>
@@ -152,8 +209,8 @@ function Home() {
       )}
 
       {/* Meduushtei Section */}
-      <h1 className="mt-20 mb-16 font-bold text-3xl yeseva">Мэдүүштэй</h1>
-      <div className="px-10 w-full flex flex-row gap-10 justify-start items-start">
+      <h1 className="mt-20 mb-6 font-bold text-3xl yeseva hidden sm:block">Мэдүүштэй</h1>
+      <div className="px-10 w-full flex-row  gap-10 justify-start items-start hidden sm:flex">
         {news.filter((data) => data.category.includes("meduushtei") && data.mainCategory === "education").reverse().slice(-4).map((data) => (
           <Card
             key={data.id}
@@ -164,6 +221,17 @@ function Home() {
             path={`/${data.mainCategory}/${data.path}`}
             author={data.author}
           />
+        ))}
+      </div>
+      <div className='px-6 py-2 w-9/10 mt-10 mulish rounded-2xl sm:hidden block border-[1px] border-solid border-gray-300'>
+        <h1 className='text-xl w-full mb-4 yeseva border-gray-200 pb-4 border-b-[1px]'>Мэдүүштэй</h1>
+        {news.filter((data) => data.category.includes("meduushtei")).reverse().slice(0, 4).map((data) => (
+          <div key={data.id} className='mb-4 last:mb-0 border-b-[1px] border-gray-200 pb-4 last:border-b-0'>
+            <Link to={`/${data.mainCategory}/${data.path}`}>
+              <p className='text-gray-800 mb-2'>{data.title}</p>
+              <p className='text-sm text-gray-500'>{data.date}</p>
+            </Link>
+          </div>
         ))}
       </div>
 
@@ -180,10 +248,10 @@ function Home() {
 
 
       {/* Category Card */}
-      <div className="px-10 py-30 w-full flex flex-row justify-around items-start">
+      <div className="sm:px-10 sm:py-30 w-full py-10 flex flex-col sm:flex-row justify-around gap-5 items-center">
         {['sport', 'technology', 'science', 'events'].map(category => {
           const lastNews = news
-            .filter(data => data.category.includes(category))
+            .filter(data => data.mainCategory==(category))
             .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by date
             .slice(0, 1); // Get the most recent item
 
@@ -202,10 +270,10 @@ function Home() {
       </div>
 
       {/* All Section */}
-      <h1 className="mt-20 mb-16 font-bold text-3xl yeseva">Бүх мэдээ</h1>
-      <div className="px-10 flex-wrap w-full flex flex-row gap-10 justify-start items-start">
+      <h1 className="sm:mt-20 mt-8 mb-6 sm:mb-16 font-bold text-2xl sm:text-3xl yeseva">Бүх мэдээ</h1>
+      <div className="sm:px-10 px-4 flex-wrap w-full flex flex-row sm:gap-10  justify-start items-start">
         {news.filter((data) => data.mainCategory === "education")
-            .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
+            .slice(currentPage * (windowWidth < 640 ? 4 : itemsPerPage), (currentPage + 1) * (windowWidth < 640 ? 4 : itemsPerPage))
             .reverse()
             .map((data) => (
           <Card
@@ -216,11 +284,12 @@ function Home() {
             img={data.img1}
             path={`/${data.mainCategory}/${data.path}`}
             author={data.author}
+            date={data.date}
           />
         ))}
       </div>
       {/* Pagination Controls */}
-      <div className="flex justify-center gap-5 w-full px-10 mt-4">
+      <div className="flex justify-center gap-5 w-full px-10 mt-4 mb-10">
         <button
           className="rounded-full px-4 py-2"
           onClick={() => { 
@@ -283,4 +352,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Education;

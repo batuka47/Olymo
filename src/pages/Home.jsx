@@ -1,18 +1,33 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Card from '../components/card';
 import BigBanner from '../components/bigBanner';
 import Advertisement from '../components/advertisement';
 import CategoryCard from '../components/categoryCard';
 import DailyCartoon from '../components/dailyCartoon';
 import {news, dailyCartoon, advertisement} from '../Data'
-
+import { motion } from 'framer-motion'
 
 function Home() {
   const [isDragging, setIsDragging] = useState(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
   const containerRef = useRef(null);
+  const navRef = useRef(null);
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(location.pathname);
+
+  const navItems = [
+    { name: "Онцлох", path: "/" },
+    { name: "Боловсрол", path: "/education" },
+    { name: "Олимпиад", path: "/olympiad" },
+    { name: "Дэлхийд", path: "/world" },
+    { name: "Спорт", path: "/sports" },
+    { name: "Технологи", path: "/technology" },
+    { name: "Шинжлэх ухаан", path: "/science" },
+    { name: "Эвентүүд", path: "/events" },
+    { name: "Бидний тухай", path: "/about" },
+  ];
 
   useEffect(() => {
     const handleMouseUpGlobal = () => {
@@ -45,15 +60,42 @@ function Home() {
     <div className="min-h-screen w-full mulish flex flex-col items-center justify-center">
       {/* Hero Section */}
       <div className="bg-[url('/welcome.svg')] bg-cover h-[230px] bg-center sm:h-screen w-full px-10">
-        <h1 className="default-white-text sm:-mt-14 -mt-4 sm:text-5xl  yeseva w-3/4 h-full flex justify-center items-center">
+        <h1 className="default-white-text sm:-mt-14 -mt-4 sm:text-5xl text-2xl  yeseva w-3/4 h-full flex justify-center items-center">
           Таны боловсролын <br /> мэдээллийн шинэ <br /> шийдэл
         </h1>
       </div>
-
+      <motion.div 
+      ref={navRef}
+      className="left-0 w-full sm:hidden bg-white mt-4 border-y border-gray-200"
+      transition={{ duration: 0.3 }}
+      >
+        <div className='flex items-center px-2 py-2 overflow-x-auto scrollbar-hide whitespace-nowrap gap-2'>
+          {navItems.map((item, index) => (
+            <Link
+              key={index}
+              to={item.path}
+              className={`flex flex-col items-center px-2 py-1 hover:bg-gray-100 rounded-md transition-colors duration-200 ${
+                activeTab === item.path 
+                  ? 'text-[#1E3083]' 
+                  : 'text-gray-600'
+              }`}
+              onClick={() => {
+                setActiveTab(item.path);
+                window.scrollTo(0, 0);
+              }}
+            >
+              <span className='text-md font-semibold text-center whitespace-nowrap'>{item.name}</span>
+              {activeTab === item.path && (
+                <div className="h-0.5 w-full bg-[#1E3083] mt-1" />
+              )}
+            </Link>
+          ))}
+        </div>
+      </motion.div>
 
 
       {/* Feature News Section */}
-      <h1 className="sm:mt-40 sm:mb-16 mb-6 text-2xl font-bold sm:text-3xl yeseva">Онцлох мэдээ</h1>
+      <h1 className="sm:mt-40 mt-6 sm:mb-16 mb-6 text-2xl font-bold sm:text-3xl yeseva">Онцлох мэдээ</h1>
       <div className="sm:px-10 px-4 w-full flex sm:gap-10 sm:flex-row flex-col justify-start items-start">
         {news.filter((data) => data.category.includes("feature")).reverse().slice(-4).map((data) => (
           <Card
@@ -178,12 +220,12 @@ function Home() {
           />
         ))}
       </div>
-      <div className='p-5 w-9/10 rounded-2xl sm:hidden block border-[1px] border-solid border-gray-300'>
-        <h1 className='text-2xl px-10 w-9/10 mb-4 border-gray-200 pb-4 border-b-[1px]'>Мэдүүштэй</h1>
-        {news.filter((data) => data.category.includes("meduushtei")).reverse().slice(0, 3).map((data) => (
-          <div key={data.id} className='mb-4 border-b-[1px] border-gray-200 pb-4 last:border-b-0'>
+      <div className='px-6 py-2 w-9/10 mt-10 rounded-2xl sm:hidden block border-[1px] border-solid border-gray-300'>
+        <h1 className='text-xl w-full mb-4 border-gray-200 pb-4 border-b-[1px]'>Мэдүүштэй</h1>
+        {news.filter((data) => data.category.includes("meduushtei")).reverse().slice(0, 4).map((data) => (
+          <div key={data.id} className='mb-4 last:mb-0 border-b-[1px] border-gray-200 pb-4 last:border-b-0'>
             <Link to={`/${data.mainCategory}/${data.path}`}>
-              <p className='text-gray-800 mb-2'>{data.sDescription}</p>
+              <p className='text-gray-800 mb-2'>{data.title}</p>
               <p className='text-sm text-gray-500'>{data.date}</p>
             </Link>
           </div>
@@ -223,7 +265,7 @@ function Home() {
       )}
 
       {/* Category Card */}
-      <div className="px-10 sm:py-30 w-full py-10 flex flex-col sm:flex-row justify-around items-start">
+      <div className="sm:px-10 sm:py-30 w-full py-10 flex flex-col sm:flex-row justify-around gap-5 items-center">
         {['sport', 'technology', 'science', 'events'].map(category => {
           const lastNews = news
             .filter(data => data.mainCategory==(category))

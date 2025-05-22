@@ -10,8 +10,8 @@ function Card(props) {
             <h1 className='font-semibold text-sm sm:text-lg sm:mt-2'>{props.title}</h1>
             <p className='font-thin text-sm/tight my-2 hidden sm:block'>{props.description}</p>
             <div className='flex flex-row justify-between'>
-              <p className='font-semibold text-sm sm:text-md'>By {props.author}</p>
-              <p className='font-semibold text-sm sm:text-md block sm:hidden'>{props.date}</p>
+              <p className=' text-sm sm:text-md'>By {props.author}</p>
+              <p className=' text-sm sm:text-md block sm:hidden'>{props.date}</p>
             </div>
           </div>
         </Link>
