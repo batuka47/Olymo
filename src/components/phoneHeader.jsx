@@ -18,7 +18,7 @@ function PhoneHeader({ isSidebarOpen, setIsSidebarOpen }) {
     { name: "Түгээмэл асуултууд", path: "/faq", icon: "/FAQ.svg", activeIcon:"/activeFAQ.svg" },
     { name: "Сурталчилгаа байршуулах", path: "/submit", icon:"/surtchilgaa.svg", activeIcon:"/activeSurtchilgaa.svg" },
     { name: "Хамтарч ажиллах", path: "/hamtrah", icon:"/hamtrah.svg", activeIcon:"/activeHamtrah.svg" },
-    { name: "Редакцийн ёс зүй", path: "/editor", icon:"/redakts.svg", activeIcon:"/activeRedakts.svg" },  
+    { name: "Редакцийн ёс зүй", path: "/redakts", icon:"/redakts.svg", activeIcon:"/activeRedakts.svg" },  
     { name: "Нууцлалын бодлого", path: "/privacy", icon:"/nuuts.svg", activeIcon:"/activeNuuts.svg" },
     { name: "Холбоо барих", path: "/contact", icon:"/call.svg", activeIcon:"/activeCall.svg" },
   ];

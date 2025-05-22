@@ -16,7 +16,11 @@ import PhoneFooter from './components/phoneFooter';
 import PhoneNav from './components/phoneNav';
 import AboutUs from './pages/AboutUs';
 import EventTemplate from './pages/EventTemplate';
-
+import FAQ from './pages/FAQ';
+import Redakts from './pages/Redakts';
+import Surtchilgaa from './pages/Surtchilgaa';
+import Privacy from './pages/Privacy';
+import Contact from './pages/Contact';
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -37,6 +41,11 @@ function App() {
         <Route path='/events/:mainCategory/:name' element={<EventTemplate />} />
         <Route path='/:mainCategory/:name' element={<NewsTemplate />} />
         <Route path='/about' element={<AboutUs/>} />
+        <Route path='/faq' element={<FAQ/>} />
+        <Route path='/redakts' element={<Redakts/>} />
+        <Route path='/submit' element={<Surtchilgaa/>} />
+        <Route path="/privacy" element={<Privacy/>} />
+        <Route path="/contact" element={<Contact/>} />
       </Routes>
       <Footer />
       <PhoneFooter/>

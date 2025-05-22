@@ -35,7 +35,7 @@ function Footer() {
         </div>
         <div className='flex flex-col font-thin gap-1 text-sm'>
           <Link to="/submit" onClick={() => window.scrollTo(0, 0)}>Сурталчилгаа байршуулах</Link>
-          <Link to="/editor" onClick={() => window.scrollTo(0, 0)}>Редакцийн ёс зүй</Link>
+          <Link to="/redakts" onClick={() => window.scrollTo(0, 0)}>Редакцийн ёс зүй</Link>
         </div>
         <div className='flex flex-col font-thin gap-1 text-sm'>
           <Link to="/privacy" onClick={() => window.scrollTo(0, 0)}>Нууцлалын бодлого</Link>

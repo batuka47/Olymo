@@ -8,7 +8,7 @@ function PhoneFooter() {
           <Link to="/about">Бидний тухай</Link>
           <Link to="/faq">Түгээмэл асуултууд</Link>
           <Link to="/submit">Сурталчилгаа байршуулах</Link>
-          <Link to="/editor">Редакцийн ёс зүй</Link>
+          <Link to="/redakts">Редакцийн ёс зүй</Link>
           <Link to="/privacy">Нууцлалын бодлого</Link>
           <Link to="/contact">Холбоо барих</Link>
       </div>
@@ -19,7 +19,7 @@ function PhoneFooter() {
       </div>
       <div className='flex flex-row gap-2 text-small items-center w-full justify-center py-5'>
         <img src="/copyright.svg" alt="copyright" className='scale-75'/>
-        <p className='text-[#dadada]'>2024 Олимо ХХК</p>
+        <p className='text-[#dadada]'>{new Date().getFullYear()} Олимо ХХК</p>
       </div>
     </div>
   )
