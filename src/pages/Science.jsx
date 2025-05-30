@@ -197,7 +197,7 @@ function Science() {
       </div>
     </motion.div>
       <h1 className=" block sm:hidden font-bold text-2xl yeseva">Онцлох мэдээ</h1>
-      <p className="block mb-8 sm:hidden font-light text-xl mulish">Шинжлэх ухааны салбарын гол мэдээнүүд</p>
+      <p className="block mb-8 sm:hidden font-light text-xl 2xl:text-2xl mulish">Шинжлэх ухааны салбарын гол мэдээнүүд</p>
       {/* Big Banner */}
       {news.length > 0 && (
         (() => {
@@ -221,8 +221,8 @@ function Science() {
 
 
       {/* Feature Section */}
-      <h1 className="sm:mt-20 mt-8 hidden sm:block font-bold text-3xl yeseva">Онцлох мэдээ</h1>
-      <p className="sm:mb-16 mb-6 hidden sm:block font-light text-xl mulish">Шинжлэх ухааны салбарын гол мэдээнүүд</p>
+      <h1 className="sm:mt-20 mt-8 hidden sm:block font-bold text-2xl sm:text-3xl 2xl:text-5xl  yeseva">Онцлох мэдээ</h1>
+      <p className="sm:mb-16 mb-6 hidden sm:block font-light text-xl 2xl:text-2xl mulish">Шинжлэх ухааны салбарын гол мэдээнүүд</p>
 
       <div
         ref={containerRef}
@@ -231,7 +231,7 @@ function Science() {
         onDragStart={(e) => e.preventDefault()}
         className={`w-full sm:overflow-x-auto scrollbar-hide px-4 sm:px-10 sm:${isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'}`}
       >
-        <div className="flex sm:flex-row flex-col sm:gap-10 justify-start items-start sm:w-full sm:min-w-max">
+        <div className="flex sm:flex-row flex-col sm:gap-10 justify-center items-start sm:w-full sm:min-w-max">
           {news.filter((data) => data.mainCategory === "science" && data.category.includes("feature")).reverse().slice(0, windowWidth < 640 ? 6 : news.length).map((data) => (
             <Card
               key={data.id}
@@ -283,8 +283,8 @@ function Science() {
       )}
 
       {/* Meduushtei Section */}
-      <h1 className="mt-20 mb-6 font-bold text-3xl yeseva hidden sm:block">Мэдүүштэй</h1>
-      <div className="px-10 w-full flex-row  gap-10 justify-start items-start hidden sm:flex">
+      <h1 className="mt-20 mb-16 font-bold text-2xl sm:text-3xl 2xl:text-5xl  yeseva hidden sm:block">Мэдүүштэй</h1>
+      <div className="px-10 w-full flex-row  gap-10 justify-center items-start hidden sm:flex">
         {news.filter((data) => data.category.includes("meduushtei") && data.mainCategory === "science").reverse().slice(-4).map((data) => (
           <Card
             key={data.id}
@@ -344,8 +344,8 @@ function Science() {
       </div>
 
       {/* All Section */}
-      <h1 className="sm:mt-20 mt-8 mb-6 sm:mb-16 font-bold text-2xl sm:text-3xl yeseva">Бүх мэдээ</h1>
-      <div className="sm:px-10 px-4 flex-wrap w-full flex flex-row sm:gap-10  justify-start items-start">
+      <h1 className="sm:mt-20 mt-8 mb-6 sm:mb-16 font-bold text-2xl sm:text-3xl 2xl:text-5xl   yeseva">Бүх мэдээ</h1>
+      <div className="sm:px-10 px-4 flex-wrap w-full flex flex-row sm:gap-10  justify-center items-start">
         {news.filter((data) => data.mainCategory === "science")
             .slice(currentPage * (windowWidth < 640 ? 4 : itemsPerPage), (currentPage + 1) * (windowWidth < 640 ? 4 : itemsPerPage))
             .reverse()
@@ -378,20 +378,32 @@ function Science() {
           <div className="rounded-full px-4 py-2 hover:bg-gray-200">...</div>
         )}
         {currentPage > totalPages - 1 && (
-          <div className="rounded-full px-4 py-2">{currentPage - 1}</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => {
+            setCurrentPage(currentPage - 1);
+            scrollToTop();
+          }}>{currentPage - 1}</div>
         )}
         {currentPage > 0 && (
-          <div className="rounded-full px-4 py-2">{currentPage}</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => {
+            setCurrentPage(currentPage);
+            scrollToTop();
+          }}>{currentPage}</div>
         )}
-        <div className="rounded-full bg-gray-300 px-4 py-2">{currentPage + 1}</div>
+        <div className="rounded-full bg-gray-300 px-4 py-2 cursor-pointer">{currentPage + 1}</div>
         {currentPage < totalPages - 1 && (
-          <div className="rounded-full px-4 py-2">{currentPage + 2}</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => {
+            setCurrentPage(currentPage + 2);
+            scrollToTop();
+          }}>{currentPage + 2}</div>
         )}
         {currentPage < 1 && (
-          <div className="rounded-full px-4 py-2">{currentPage + 3}</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => {
+            setCurrentPage(currentPage + 3);
+            scrollToTop();
+          }}>{currentPage + 3}</div>
         )}
         {currentPage < totalPages - 2 && (
-          <div className="rounded-full px-4 py-2">...</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200">...</div>
         )}
         <button
           className="rounded-full px-4 py-2"
@@ -399,7 +411,7 @@ function Science() {
             setCurrentPage(prev => Math.min(prev + 1, totalPages - 1)); 
             scrollToTop(); // Scroll to top on page change
           }}
-          disabled={currentPage >= totalPages}
+          disabled={currentPage >= totalPages - 1}
         >
           <img src="/arrowD.svg" alt="next" className='-rotate-90' />
         </button>

@@ -27,7 +27,7 @@ function Contact() {
   return (
     <div className="min-h-screen default-black-text sm:pt-32 sm:pb-20 px-4 sm:px-8 md:px-16 lg:px-40">
       <div className="max-w-4xl mx-auto">
-        <h1 className="sm:text-3xl text-2xl font-bold mb-6 yeseva text-center">Холбоо барих</h1>
+        <h1 className="text-2xl sm:text-3xl 2xl:text-5xl  text-2xl font-bold mb-6 yeseva text-center">Холбоо барих</h1>
 
         <div className="flex flex-col gap-12 mb-16 ">
           <div className="space-y-8 w-full flex flex-col sm:flex-row justify-between">
@@ -57,7 +57,7 @@ function Contact() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-          <h1 className="sm:text-3xl text-2xl font-bold mb-6 yeseva text-center">Асуулт, санал, хүсэлт гарвал</h1>
+          <h1 className="text-2xl sm:text-3xl 2xl:text-5xl  text-2xl font-bold mb-6 yeseva text-center">Асуулт, санал, хүсэлт гарвал</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">

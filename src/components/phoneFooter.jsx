@@ -11,6 +11,7 @@ function PhoneFooter() {
           <Link to="/redakts">Редакцийн ёс зүй</Link>
           <Link to="/privacy">Нууцлалын бодлого</Link>
           <Link to="/contact">Холбоо барих</Link>
+          <Link to="/merch">Merch</Link>
       </div>
       <div className='flex flex-row justify-center gap-14 w-full items-center py-4'>
         <img src="/fb.svg" alt="fb" className='scale-125' />

@@ -131,7 +131,7 @@ function Home() {
     <div className="min-h-screen w-full mulish flex flex-col items-center justify-center">
       {/* Hero Section */}
       <div className="bg-[url('/welcome.svg')] bg-cover h-[230px] bg-center sm:h-screen w-full px-10">
-        <h1 className="default-white-text sm:-mt-14 -mt-4 sm:text-5xl text-2xl  yeseva w-3/4 h-full flex justify-center items-center">
+        <h1 className="default-white-text sm:-mt-14 -mt-4 2xl:text-6xl sm:text-5xl text-2xl  yeseva w-3/4 h-full flex justify-center items-center">
           Таны боловсролын <br /> мэдээллийн шинэ <br /> шийдэл
         </h1>
       </div>
@@ -166,8 +166,8 @@ function Home() {
 
 
       {/* Feature News Section */}
-      <h1 className="sm:mt-40 mt-6 sm:mb-16 mb-6 text-2xl font-bold sm:text-3xl yeseva">Онцлох мэдээ</h1>
-      <div className="sm:px-10 px-4 w-full flex sm:gap-10 sm:flex-row flex-col justify-start items-start">
+      <h1 className="sm:mt-40 mt-6 sm:mb-16 mb-6 text-2xl font-bold sm:text-3xl 2xl:text-5xl yeseva">Онцлох мэдээ</h1>
+      <div className="sm:px-10 px-4 w-full flex sm:gap-10 sm:flex-row flex-col justify-center items-start">
         {news.filter((data) => data.category.includes("feature")).reverse().slice(-4).map((data) => (
           <Card
             key={data.id}
@@ -217,8 +217,8 @@ function Home() {
       )}
 
       {/* Olympiad Section */}
-      <h1 className="sm:mt-20 mt-8 font-bold text-2xl sm:text-3xl yeseva">Олимпиад</h1>
-      <p className="sm:mb-16 mb-6 font-light text-xl mulish">Салбаруудын гол олимпиадууд</p>
+      <h1 className="sm:mt-20 mt-8 font-bold text-2xl sm:text-3xl 2xl:text-5xl yeseva">Олимпиад</h1>
+      <p className="sm:mb-16 mb-6 font-light text-xl 2xl:text-2xl mulish">Салбаруудын гол олимпиадууд</p>
 
       <div
         ref={containerRef}
@@ -227,7 +227,7 @@ function Home() {
         onDragStart={(e) => e.preventDefault()}
         className={`w-full sm:overflow-x-auto scrollbar-hide px-4 sm:px-10 sm:${isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'}`}
       >
-        <div className="flex sm:flex-row flex-col sm:gap-10 justify-start items-start w-full sm:min-w-max">
+        <div className="flex sm:flex-row flex-col sm:gap-10 justify-center items-start w-full sm:min-w-max">
           {news.filter((data) => data.category.includes("olympiad")).reverse().slice(0, window.innerWidth < 640 ? 6 : news.length).map((data) => (
             <Card
               key={data.id}
@@ -277,8 +277,8 @@ function Home() {
       )}
 
       {/* Meduushtei Section */}
-      <h1 className="mt-20 mb-6 font-bold text-3xl yeseva hidden sm:block">Мэдүүштэй</h1>
-      <div className="px-10 w-full flex-row  gap-10 justify-start items-start hidden sm:flex">
+      <h1 className="mt-20 mb-16 font-bold text-2xl sm:text-3xl 2xl:text-5xl  yeseva hidden sm:block">Мэдүүштэй</h1>
+      <div className="px-10 w-full flex-row  gap-10 justify-center items-start hidden sm:flex">
         {news.filter((data) => data.category.includes("meduushtei")).reverse().slice(-4).map((data) => (
           <Card
             key={data.id}
@@ -291,7 +291,7 @@ function Home() {
           />
         ))}
       </div>
-      <div className='px-6 py-2 w-9/10 mt-10 rounded-2xl sm:hidden block border-[1px] border-solid border-gray-300'>
+      <div className='px-6 py-2 w-9/10 rounded-2xl sm:hidden block border-[1px] border-solid border-gray-300'>
         <h1 className='text-xl w-full mb-4 border-gray-200 pb-4 border-b-[1px]'>Мэдүүштэй</h1>
         {news.filter((data) => data.category.includes("meduushtei")).reverse().slice(0, 4).map((data) => (
           <div key={data.id} className='mb-4 last:mb-0 border-b-[1px] border-gray-200 pb-4 last:border-b-0'>
@@ -348,7 +348,7 @@ function Home() {
               key={lastNews[0].id}
               id={lastNews[0].id}
               title={lastNews[0].title}
-              category={lastNews[0].mainCategory}
+              category={lastNews[0].mainCategory} 
               img={lastNews[0].img1} // Adjust the image property as necessary
               path={`/${lastNews[0].mainCategory}/${lastNews[0].path}`}
               author={lastNews[0].author}

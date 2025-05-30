@@ -65,7 +65,7 @@ function Redakts() {
   return (
     <div className="default-black-text sm:pt-32 pb-20 px-4 sm:px-8 md:px-16 lg:px-40">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold yeseva mb-12 text-center">Редакцийн ёс зүй</h1>
+        <h1 className="text-2xl sm:text-3xl 2xl:text-5xl  font-bold yeseva mb-12 text-center">Редакцийн ёс зүй</h1>
         
         <div className="space-y-6">
           {sections.map((section, index) => (
