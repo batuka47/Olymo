@@ -18,7 +18,7 @@ const Card = ({ title, content, isActive, image }) => (
       <div className="absolute inset-0 bg-black/70 rounded-2xl" />
     )}
     <div className="relative z-10">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4">{title}</h2>
+      <h2 className="text-2xl sm:text-3xl 2xl:text-5xl   font-bold mb-4">{title}</h2>
       <p className="text-sm sm:text-lg leading-relaxed">{content}</p>
     </div>
   </div>
@@ -32,7 +32,7 @@ const Carousel = ({ children }) => {
     <div className="relative w-[90vw] h-[60vw] max-w-[35rem] max-h-[25rem] perspective-500 transform-style-3d">
       {active > 0 && (
         <button
-          className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 text-white text-3xl sm:text-5xl z-50 cursor-pointer select-none bg-transparent border-none"
+          className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 text-white text-2xl  sm:text-5xl z-50 cursor-pointer select-none bg-transparent border-none"
           onClick={() => setActive((i) => i - 1)}
         >
           <TiChevronLeftOutline />
@@ -67,7 +67,7 @@ const Carousel = ({ children }) => {
       })}
       {active < count - 1 && (
         <button
-          className="absolute right-0 top-1/2 translate-x-full -translate-y-1/2 text-white text-3xl sm:text-5xl z-50 cursor-pointer select-none bg-transparent border-none"
+          className="absolute right-0 top-1/2 translate-x-full -translate-y-1/2 text-white text-2xl sm:text-5xl z-50 cursor-pointer select-none bg-transparent border-none"
           onClick={() => setActive((i) => i + 1)}
         >
           <TiChevronRightOutline />
@@ -141,13 +141,13 @@ const AboutUs = () => {
           <div className="flex flex-row items-end gap-8 mb-8">
             <img src="/left.svg" alt="left" className="w-1/2 sm:-ml-5 -mb-10" />
             <div className="w-1/2 flex flex-col items-center">
-              <h1 className="sm:text-3xl yeseva text-lg font-bold mb-4 text-center">Our Vision</h1>
+              <h1 className=" yeseva text-lg font-bold mb-4 text-center">Our Vision</h1>
               <p className="sm:text-base text-[10px] text-center sm:w-1/2">Боловсролтой холбогдолтой бүхий л гадаад дотоодын мэдээ мэдээллийг хэрэглэгчиддээ олгох. Хамгийн өргөн хэрэглээний сайт болох хараатай.</p>
             </div>
           </div>
           <div className="flex flex-row items-end gap-8">
             <div className="w-1/2 flex flex-col items-center">
-              <h1 className="sm:text-3xl yeseva text-lg font-bold mb-4 text-center">Our Mission</h1>
+              <h1 className="yeseva text-lg font-bold mb-4 text-center">Our Mission</h1>
               <p className="sm:text-base text-[10px] text-center sm:w-1/2">ЕБС төдийгүй, Их Сургуулиудын оюутан залуусын дунд зохиогдох уралдаан тэмцээн болон олимпиадуудын мэдээ мэдээллийн хомсдолыг арилгах; түргэн шуурхай, тодорхой байдлаар олимпиадын зарыг хүргэх.</p>
             </div>
             <img src="/rigth.svg" alt="rigth" className="w-1/2 sm:-mr-5 -mb-10" />

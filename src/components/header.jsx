@@ -84,17 +84,18 @@ function Header() {
 
   return (
     <motion.div
-      className={`h-20 w-full mulish sm:block hidden fixed pb-6 top-0 left-0 ${bgSrc} flex flex-col px-10 z-50 transition-transform duration-300`}
+      className={`h-20 2xl:h-28 w-full mulish sm:block hidden fixed pb-6 top-0 left-0 ${bgSrc} flex flex-col px-10 z-50 transition-transform duration-300`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
       <div className="h-2/3 mt-2 w-full flex flex-row relative items-center justify-end gap-5">
-        <Link to={'/'} className="mx-auto">
-            <img src={logoSrc} alt="logo" className='h-12' />
+        <Link to={'/'} onClick={() => window.scrollTo(0, 0)} className="mx-auto">
+            <img src={logoSrc} alt="logo" className='h-12 2xl:h-16' />
         </Link>
-        <button className='default-purple w-24 h-7 absolute right-12 default-white-text flex justify-center items-center rounded-sm'>Нэвтрэх</button>
-        <img src={searchIconSrc} alt="search" className='absolute right-0' />
+        <Link to={'/search'} onClick={() => window.scrollTo(0, 0)} className='absolute right-0 2xl:scale-125'>
+        <img src={searchIconSrc} alt="search"/>
+        </Link>
       </div>
       <motion.nav
         className={`relative flex justify-center space-x-4 mt-2`}
@@ -106,7 +107,7 @@ function Header() {
           <div className="relative" key={index} ref={el => tabRefs.current[index] = el}>
             <Link
               to={item.path}
-              className="text-gray-700 transition-all duration-300"
+              className="text-gray-700 2xl:text-lg transition-all duration-300"
               onClick={() => window.scrollTo(0, 0)}
             >
               {item.name}

@@ -27,7 +27,7 @@ function Surtchilgaa() {
   return (
     <div className="default-black-text sm:pt-32 pb-20 px-4 sm:px-8 md:px-16 lg:px-40">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 yeseva text-center">Сурталчилгаа байршуулах</h1>
+        <h1 className="text-2xl sm:text-3xl 2xl:text-5xl  font-bold mb-6 yeseva text-center">Сурталчилгаа байршуулах</h1>
         <p className="mulish mb-12 text-center">Хамтран ажиллах дэлгэрэнгүй мэдээллийг авах</p>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

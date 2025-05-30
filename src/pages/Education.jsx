@@ -91,7 +91,7 @@ function Education() {
   const totalPages = Math.ceil(news.filter(data => data.mainCategory === "education").length / itemsPerPage);
 
   return (
-    <div className="min-h-screen sm:mt-32 mulish flex flex-col items-center justify-center">
+    <div className="min-h-screen sm:mt-32 mulish flex flex-col items-center justify-start">
       <motion.div 
       ref={navRef}
       className="left-0 w-full sm:hidden bg-white  border-y border-gray-200"
@@ -121,7 +121,7 @@ function Education() {
       </div>
     </motion.div>
       <h1 className=" block sm:hidden font-bold text-2xl yeseva">Онцлох мэдээ</h1>
-      <p className="block mb-8 sm:hidden font-light text-xl mulish">Боловсролын салбарын гол мэдээнүүд</p>
+      <p className="block mb-8 sm:hidden font-light text-xl 2xl:text-2xl mulish">Боловсролын салбарын гол мэдээнүүд</p>
       {/* Big Banner */}
       {news.length > 0 && (
         (() => {
@@ -147,8 +147,8 @@ function Education() {
 
 
       {/* Feature Education Section */}
-      <h1 className="sm:mt-20 mt-8 hidden sm:block font-bold text-3xl yeseva">Онцлох мэдээ</h1>
-      <p className="sm:mb-16 mb-6 hidden sm:block font-light text-xl mulish">Боловсролын салбарын гол мэдээнүүд</p>
+      <h1 className="sm:mt-20 mt-8 hidden sm:block font-bold text-2xl sm:text-3xl 2xl:text-5xl  yeseva">Онцлох мэдээ</h1>
+      <p className="sm:mb-16 mb-6 hidden sm:block font-light text-xl 2xl:text-2xl mulish">Боловсролын салбарын гол мэдээнүүд</p>
 
       <div
         ref={containerRef}
@@ -157,7 +157,7 @@ function Education() {
         onDragStart={(e) => e.preventDefault()}
         className={`w-full sm:overflow-x-auto scrollbar-hide px-4 sm:px-10 sm:${isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'}`}
       >
-        <div className="flex sm:flex-row flex-col sm:gap-10 justify-start items-start sm:w-full sm:min-w-max">
+        <div className="flex sm:flex-row flex-col sm:gap-10 justify-center items-start sm:w-full sm:min-w-max">
           {news.filter((data) => data.mainCategory === "education" && data.category.includes("feature")).reverse().slice(0, windowWidth < 640 ? 6 : news.length).map((data) => (
             <Card
               key={data.id}
@@ -209,8 +209,8 @@ function Education() {
       )}
 
       {/* Meduushtei Section */}
-      <h1 className="mt-20 mb-6 font-bold text-3xl yeseva hidden sm:block">Мэдүүштэй</h1>
-      <div className="px-10 w-full flex-row  gap-10 justify-start items-start hidden sm:flex">
+      <h1 className="mt-20 mb-16 font-bold text-2xl sm:text-3xl 2xl:text-5xl  yeseva hidden sm:block">Мэдүүштэй</h1>
+      <div className="px-10 w-full flex-row  gap-10 justify-center items-start hidden sm:flex">
         {news.filter((data) => data.category.includes("meduushtei") && data.mainCategory === "education").reverse().slice(-4).map((data) => (
           <Card
             key={data.id}
@@ -223,7 +223,7 @@ function Education() {
           />
         ))}
       </div>
-      <div className='px-6 py-2 w-9/10 mt-10 mulish rounded-2xl sm:hidden block border-[1px] border-solid border-gray-300'>
+      <div className='px-6 py-2 w-9/10 mulish rounded-2xl sm:hidden block border-[1px] border-solid border-gray-300'>
         <h1 className='text-xl w-full mb-4 yeseva border-gray-200 pb-4 border-b-[1px]'>Мэдүүштэй</h1>
         {news.filter((data) => data.category.includes("meduushtei")).reverse().slice(0, 4).map((data) => (
           <div key={data.id} className='mb-4 last:mb-0 border-b-[1px] border-gray-200 pb-4 last:border-b-0'>
@@ -270,8 +270,8 @@ function Education() {
       </div>
 
       {/* All Section */}
-      <h1 className="sm:mt-20 mt-8 mb-6 sm:mb-16 font-bold text-2xl sm:text-3xl yeseva">Бүх мэдээ</h1>
-      <div className="sm:px-10 px-4 flex-wrap w-full flex flex-row sm:gap-10  justify-start items-start">
+      <h1 className="sm:mt-20 mt-8 mb-6 sm:mb-16 font-bold text-2xl sm:text-3xl 2xl:text-5xl   yeseva">Бүх мэдээ</h1>
+      <div className="sm:px-10 px-4 w-full grid grid-cols-4 sm:gap-10  justify-center items-start">
         {news.filter((data) => data.mainCategory === "education")
             .slice(currentPage * (windowWidth < 640 ? 4 : itemsPerPage), (currentPage + 1) * (windowWidth < 640 ? 4 : itemsPerPage))
             .reverse()
@@ -304,20 +304,20 @@ function Education() {
           <div className="rounded-full px-4 py-2 hover:bg-gray-200">...</div>
         )}
         {currentPage > totalPages - 1 && (
-          <div className="rounded-full px-4 py-2">{currentPage - 1}</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => setCurrentPage(currentPage - 1)}>{currentPage - 1}</div>
         )}
         {currentPage > 0 && (
-          <div className="rounded-full px-4 py-2">{currentPage}</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => setCurrentPage(currentPage)}>{currentPage}</div>
         )}
-        <div className="rounded-full bg-gray-300 px-4 py-2">{currentPage + 1}</div>
+        <div className="rounded-full bg-gray-300 px-4 py-2 cursor-pointer">{currentPage + 1}</div>
         {currentPage < totalPages - 1 && (
-          <div className="rounded-full px-4 py-2">{currentPage + 2}</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => setCurrentPage(currentPage + 2)}>{currentPage + 2}</div>
         )}
         {currentPage < 1 && (
-          <div className="rounded-full px-4 py-2">{currentPage + 3}</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={() => setCurrentPage(currentPage + 3)}>{currentPage + 3}</div>
         )}
         {currentPage < totalPages - 2 && (
-          <div className="rounded-full px-4 py-2">...</div>
+          <div className="rounded-full px-4 py-2 hover:bg-gray-200">...</div>
         )}
         <button
           className="rounded-full px-4 py-2"

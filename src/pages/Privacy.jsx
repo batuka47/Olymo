@@ -2,7 +2,7 @@ function Privacy() {
   return (
     <div className="min-h-screen default-black-text sm:pt-32 pb-20 px-4 sm:px-8 md:px-16 lg:px-40">
       <div className="max-w-4xl mx-auto p-5">
-        <h1 className="sm:text-3xl text-2xl font-bold mb-6 yeseva text-center">Нууцлалын бодлого</h1>
+        <h1 className="text-2xl sm:text-3xl 2xl:text-5xl  text-2xl font-bold mb-6 yeseva text-center">Нууцлалын бодлого</h1>
         <p className="mulish mb-12 text-center">"Lorem Ipsum" ХХК-ийн Програм хангамжийн хэлтсээс энэхүү Нууцлалын бодлогыг гаргасан болно.Нууцлалын бодлого нь хэрэглэгчийн мэдээлэлтэй хэрхэн харилцдаг болохыг тодорхойлох юм. Нууцлалын бодлогын зорилго нь манай вебсайтад зочилж, хандаж буй уншигчтай холбоотой мэдээллийн аюулгүй байдлыг хангахад оршино.</p>
 
         <div className="space-y-8">

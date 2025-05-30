@@ -121,7 +121,7 @@ function Sports() {
       </div>
     </motion.div>
       <h1 className=" block sm:hidden font-bold text-2xl yeseva">Онцлох мэдээ</h1>
-      <p className="block mb-8 sm:hidden font-light text-xl mulish">Спортын салбарын гол мэдээнүүд</p>
+      <p className="block mb-8 sm:hidden font-light text-xl 2xl:text-2xl mulish">Спортын салбарын гол мэдээнүүд</p>
       {/* Big Banner */}
       {news.length > 0 && (
         (() => {
@@ -145,8 +145,8 @@ function Sports() {
 
 
       {/* Feature Section */}
-      <h1 className="sm:mt-20 mt-8 hidden sm:block font-bold text-3xl yeseva">Онцлох мэдээ</h1>
-      <p className="sm:mb-16 mb-6 hidden sm:block font-light text-xl mulish">Спортын салбарын гол мэдээнүүд</p>
+      <h1 className="sm:mt-20 mt-8 hidden sm:block font-bold text-2xl sm:text-3xl 2xl:text-5xl  yeseva">Онцлох мэдээ</h1>
+      <p className="sm:mb-16 mb-6 hidden sm:block font-light text-xl 2xl:text-2xl mulish">Спортын салбарын гол мэдээнүүд</p>
 
       <div
         ref={containerRef}
@@ -155,7 +155,7 @@ function Sports() {
         onDragStart={(e) => e.preventDefault()}
         className={`w-full sm:overflow-x-auto scrollbar-hide px-4 sm:px-10 sm:${isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'}`}
       >
-        <div className="flex sm:flex-row flex-col sm:gap-10 justify-start items-start sm:w-full sm:min-w-max">
+        <div className="flex sm:flex-row flex-col sm:gap-10 justify-center items-start sm:w-full sm:min-w-max">
           {news.filter((data) => data.mainCategory === "sports" && data.category.includes("feature")).reverse().slice(0, windowWidth < 640 ? 6 : news.length).map((data) => (
             <Card
               key={data.id}
@@ -207,8 +207,8 @@ function Sports() {
       )}
 
       {/* Meduushtei Section */}
-      <h1 className="mt-20 mb-6 font-bold text-3xl yeseva hidden sm:block">Мэдүүштэй</h1>
-      <div className="px-10 w-full flex-row  gap-10 justify-start items-start hidden sm:flex">
+      <h1 className="mt-20 mb-16 font-bold text-2xl sm:text-3xl 2xl:text-5xl  yeseva hidden sm:block">Мэдүүштэй</h1>
+      <div className="px-10 w-full flex-row  gap-10 justify-center items-start hidden sm:flex">
         {news.filter((data) => data.category.includes("meduushtei") && data.mainCategory === "sports").reverse().slice(-4).map((data) => (
           <Card
             key={data.id}
@@ -268,8 +268,8 @@ function Sports() {
       </div>
 
       {/* All Section */}
-      <h1 className="sm:mt-20 mt-8 mb-6 sm:mb-16 font-bold text-2xl sm:text-3xl yeseva">Бүх мэдээ</h1>
-      <div className="sm:px-10 px-4 flex-wrap w-full flex flex-row sm:gap-10  justify-start items-start">
+      <h1 className="sm:mt-20 mt-8 mb-6 sm:mb-16 font-bold text-2xl sm:text-3xl 2xl:text-5xl   yeseva">Бүх мэдээ</h1>
+      <div className="sm:px-10 px-4 flex-wrap w-full flex flex-row sm:gap-10  justify-center items-start">
         {news.filter((data) => data.mainCategory === "sports")
             .slice(currentPage * (windowWidth < 640 ? 4 : itemsPerPage), (currentPage + 1) * (windowWidth < 640 ? 4 : itemsPerPage))
             .reverse()

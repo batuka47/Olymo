@@ -21,6 +21,9 @@ import Redakts from './pages/Redakts';
 import Surtchilgaa from './pages/Surtchilgaa';
 import Privacy from './pages/Privacy';
 import Contact from './pages/Contact';
+import Search from './pages/Search';
+import MerchOrderForm from './pages/Merch';
+
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -29,24 +32,26 @@ function App() {
       <Header />
       <PhoneHeader isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
       <PhoneNav isSidebarOpen={isSidebarOpen} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/education" element={<Education />} />
-        <Route path="/olympiad" element={<Olympiad />} />
-        <Route path="/world" element={<World />} />
-        <Route path="/sports" element={<Sports />} />
-        <Route path="/technology" element={<Technology />} />
-        <Route path="/science" element={<Science />} />
-        <Route path='/events' element={<Events />} />
-        <Route path='/events/:mainCategory/:name' element={<EventTemplate />} />
-        <Route path='/:mainCategory/:name' element={<NewsTemplate />} />
-        <Route path='/about' element={<AboutUs/>} />
-        <Route path='/faq' element={<FAQ/>} />
-        <Route path='/redakts' element={<Redakts/>} />
-        <Route path='/submit' element={<Surtchilgaa/>} />
-        <Route path="/privacy" element={<Privacy/>} />
-        <Route path="/contact" element={<Contact/>} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/education" element={<Education />} />
+          <Route path="/olympiad" element={<Olympiad />} />
+          <Route path="/world" element={<World />} />
+          <Route path="/sports" element={<Sports />} />
+          <Route path="/technology" element={<Technology />} />
+          <Route path="/science" element={<Science />} />
+          <Route path='/events' element={<Events />} />
+          <Route path='/events/:mainCategory/:name' element={<EventTemplate />} />
+          <Route path='/:mainCategory/:name' element={<NewsTemplate />} />
+          <Route path='/about' element={<AboutUs/>} />
+          <Route path='/faq' element={<FAQ/>} />
+          <Route path='/redakts' element={<Redakts/>} />
+          <Route path='/submit' element={<Surtchilgaa/>} />
+          <Route path="/privacy" element={<Privacy/>} />
+          <Route path="/contact" element={<Contact/>} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/merch" element={<MerchOrderForm />} />
+        </Routes>
       <Footer />
       <PhoneFooter/>
     </Router>
