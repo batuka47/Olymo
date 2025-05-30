@@ -5,7 +5,6 @@ import BigBanner from '../components/bigBanner';
 import Advertisement from '../components/advertisement';
 import CategoryCard from '../components/categoryCard';
 import DailyCartoon from '../components/dailyCartoon';
-import {news, dailyCartoon, advertisement} from '../Data'
 import { motion } from 'framer-motion'
 
 function Home() {
@@ -16,6 +15,9 @@ function Home() {
   const navRef = useRef(null);
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.pathname);
+  const [users, setUsers] = useState([]);
+  const [advertisement, setAdvertisement] = useState([])
+  const [dailyCartoon, setDailyCartoon] = useState([])
 
   const navItems = [
     { name: "Онцлох", path: "/" },
@@ -53,9 +55,78 @@ function Home() {
     const walk = (x - startX.current) * 2; // control scroll speed
     containerRef.current.scrollLeft = scrollLeft.current - walk;
   };
+  const FetchUsers = () => {
+    fetch('http://localhost:8080/data')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log("Received users data:", json);
+        setUsers(json);
+      })
+      .catch(error => {
+        console.error("Error fetching users:", error);
+        // Set empty array to avoid undefined errors
+        setUsers([]);
+      });
+  };
+  
+  useEffect(() => {
+    FetchUsers();
+  }, []);
+   console.log(users)
+   const news = users;
 
+   const FetchAdvertisement = () => {
+    fetch('http://localhost:8080/advertisement/data')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log("Received users data:", json);
+        setAdvertisement(json);
+      })
+      .catch(error => {
+        console.error("Error fetching users:", error);
+        // Set empty array to avoid undefined errors
+        setAdvertisement([]);
+      });
+  };
   
-  
+  useEffect(() => {
+    FetchAdvertisement();
+  }, []);  
+    console.log(advertisement)
+
+    const FetchDailyCartoon = () => {
+      fetch('http://localhost:8080/dailyCartoons/data')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(json => {
+          console.log("Received users data:", json);
+          setDailyCartoon(json);
+        })
+        .catch(error => {
+          console.error("Error fetching users:", error);
+          // Set empty array to avoid undefined errors
+          setDailyCartoon([]);
+        });
+    };
+    
+    useEffect(() => {
+      FetchDailyCartoon();
+    }, []);  
+      console.log(dailyCartoon)
   return (
     <div className="min-h-screen w-full mulish flex flex-col items-center justify-center">
       {/* Hero Section */}
@@ -112,7 +183,7 @@ function Home() {
       </div>
       
       {/* Advertisement */}
-      {advertisement.length > 0 && (
+      {advertisement.length > 0 && ( 
         <Advertisement
           key={advertisement[0].id}
           id={advertisement[0].id}
@@ -131,7 +202,7 @@ function Home() {
           return shuffledBanners.length > 0 ? (
             <BigBanner
               key={shuffledBanners[0].id}
-              id={shuffledBanners[0].id}
+              id={shuffledBanners[0].id} 
               img={shuffledBanners[0].img1}
               title={shuffledBanners[0].title}
               description={shuffledBanners[0].sDescription}

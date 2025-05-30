@@ -3,11 +3,39 @@ import DailyCartoon from '../components/dailyCartoon';
 import EventCard from '../components/eventCard';
 import Advertisement from '../components/advertisement';
 import { useParams } from 'react-router-dom';
-import { news } from '../Data';
+import parse from 'html-react-parser';
+
 
 function NewsTemplate() {
-  const { mainCategory, name } = useParams(); // Extract route parameters
 
+
+  const { mainCategory, name } = useParams();
+  const [users, setUsers] = useState([]); // Extract route parameters
+
+  const FetchUsers = () => {
+    fetch('http://localhost:8080/data')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log("Received users data:", json);
+        setUsers(json);
+      })
+      .catch(error => {
+        console.error("Error fetching users:", error);
+        // Set empty array to avoid undefined errors
+        setUsers([]);
+      });
+  };
+  
+  useEffect(() => {
+    FetchUsers();
+  }, []);
+   console.log(users)
+   const news = users;
   // Find the news item that matches the mainCategory and name
   const newsItem = news.find(item => item.mainCategory.includes(mainCategory) && item.path === name);
 
@@ -20,10 +48,14 @@ function NewsTemplate() {
           <p className='underline font-bold'>{newsItem.author}</p>
           <p className='text-sm'>{newsItem.date}</p>
           </div>
-          <img src={newsItem.img1} alt={newsItem.title} className="my-10 w-full rounded-2xl h-auto" />
-          <p className='text-gray-500'>{newsItem.description}</p>
-          <img src={newsItem.img2} alt={newsItem.title} className="my-10 w-full rounded-2xl h-auto" />
-          <p className='text-gray-500'>{newsItem.description2}</p>
+          {newsItem.img1 && (
+            <img src={newsItem.img1} alt={newsItem.title} className="my-10 w-full rounded-2xl h-auto" />
+          )}
+          <p className='text-gray-500'>{parse(newsItem.description)}</p>
+          {newsItem.img2 && (
+            <img src={newsItem.img2} alt={newsItem.title} className="my-10 w-full rounded-2xl h-auto" />
+          )}
+          <p className='text-gray-500'>{parse(newsItem.description2)}</p>
           <div className='flex flex-row mt-10 mb-32 gap-4'>
             <p className='default-purple-text font-extrabold'>Tags:</p>
             <div className='flex flex-row gap-2 flex-wrap'>

@@ -1,9 +1,36 @@
 import { useState, useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import parse from "html-react-parser"
 import { events } from '../Data';
 
 function EventTemplate() {
-  const { mainCategory, name } = useParams(); // Extract route parameters
+  const { mainCategory, name } = useParams();
+  const [users, setUsers] = useState([]);
+  
+  const FetchUsers = () => {
+    fetch('http://localhost:8080/events/data')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log("Received users data:", json);
+        setUsers(json);
+      })
+      .catch(error => {
+        console.error("Error fetching users:", error);
+        // Set empty array to avoid undefined errors
+        setUsers([]);
+      });
+  };
+  
+  useEffect(() => {
+    FetchUsers();
+  }, []);
+   console.log(users)
+   const events = users// Extract route parameters
 
   // Find the event item that matches the mainCategory and name
   const eventItem = events.find(item => item.mainCategory.includes(mainCategory) && item.path === name);
@@ -26,12 +53,12 @@ function EventTemplate() {
             <p className='capitalize text-sm flex flex-row gap-2'> <img src="/ticket.svg" alt="ticket" className='w-5 h-5' />{eventItem.price}</p>
             <p className='capitalize text-sm flex flex-row gap-2'> <img src="/info.svg" alt="info" className='w-5 h-5' />{eventItem.contact}</p>
           </div>
-          <p className='text-gray-500 mt-5'>{eventItem.description}</p>
+          <p className='text-gray-500 mt-5'>{parse(eventItem.description)}</p>
           {eventItem.img2 && (
             <img src={eventItem.img2} alt={eventItem.title} className="my-10 w-full rounded-2xl h-auto" />
           )}
           {eventItem.description2 && (
-            <p className='text-gray-500 mb-32'>{eventItem.description2}</p>
+            <p className='text-gray-500 mb-32'>{parse(eventItem.description2)}</p>
           )}
         </div>
       ) : (

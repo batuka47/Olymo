@@ -21,6 +21,7 @@ import Redakts from './pages/Redakts';
 import Surtchilgaa from './pages/Surtchilgaa';
 import Privacy from './pages/Privacy';
 import Contact from './pages/Contact';
+import Search from './pages/Search'
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -46,6 +47,7 @@ function App() {
         <Route path='/submit' element={<Surtchilgaa/>} />
         <Route path="/privacy" element={<Privacy/>} />
         <Route path="/contact" element={<Contact/>} />
+        <Route path="/search" element={<Search/>} />
       </Routes>
       <Footer />
       <PhoneFooter/>

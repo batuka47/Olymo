@@ -20,6 +20,9 @@ function Education() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.pathname);
 
+  const [advertisement, setAdvertisement] = useState([])
+  const [dailyCartoon, setDailyCartoon] = useState([])
+
   const navItems = [
     { name: "Онцлох", path: "/" },
     { name: "Боловсрол", path: "/education" },
@@ -87,6 +90,80 @@ function Education() {
 
     requestAnimationFrame(animateScroll); // Start the animation
   };
+  const [users, setUsers] = useState([]); // Extract route parameters
+
+  const FetchUsers = () => {
+    fetch('http://localhost:8080/data')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log("Received users data:", json);
+        setUsers(json);
+      })
+      .catch(error => {
+        console.error("Error fetching users:", error);
+        // Set empty array to avoid undefined errors
+        setUsers([]);
+      });
+  };
+  
+  useEffect(() => {
+    FetchUsers();
+  }, []);
+   console.log(users)
+   const news = users;
+
+   const FetchAdvertisement = () => {
+    fetch('http://localhost:8080/advertisement/data')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log("Received users data:", json);
+        setAdvertisement(json);
+      })
+      .catch(error => {
+        console.error("Error fetching users:", error);
+        // Set empty array to avoid undefined errors
+        setAdvertisement([]);
+      });
+  };
+  
+  useEffect(() => {
+    FetchAdvertisement();
+  }, []);  
+    console.log(advertisement)
+
+    const FetchDailyCartoon = () => {
+      fetch('http://localhost:8080/dailyCartoons/data')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(json => {
+          console.log("Received users data:", json);
+          setDailyCartoon(json);
+        })
+        .catch(error => {
+          console.error("Error fetching users:", error);
+          // Set empty array to avoid undefined errors
+          setDailyCartoon([]);
+        });
+    };
+    
+    useEffect(() => {
+      FetchDailyCartoon();
+    }, []);  
+      console.log(dailyCartoon)
 
   const totalPages = Math.ceil(news.filter(data => data.mainCategory === "education").length / itemsPerPage);
 

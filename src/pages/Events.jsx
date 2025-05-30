@@ -11,6 +11,7 @@ function Events() {
   const navRef = useRef(null);
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.pathname);
+  const [users, setUsers] = useState([]);
 
   const navItems = [
     { name: "Онцлох", path: "/" },
@@ -23,6 +24,30 @@ function Events() {
     { name: "Эвентүүд", path: "/events" },
     { name: "Бидний тухай", path: "/about" },
   ];
+  const FetchUsers = () => {
+    fetch('http://localhost:8080/events/data')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log("Received users data:", json);
+        setUsers(json);
+      })
+      .catch(error => {
+        console.error("Error fetching users:", error);
+        // Set empty array to avoid undefined errors
+        setUsers([]);
+      });
+  };
+  
+  useEffect(() => {
+    FetchUsers();
+  }, []);
+   console.log(users)
+   const events = users
   return (
     <div className="min-h-screen sm:mt-32 mulish flex flex-col items-center justify-center">
       <motion.div 
